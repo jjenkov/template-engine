@@ -5,8 +5,15 @@ insertion points.
 Templates are binary data blocks. Data that can be inserted are also binary data blocks. 
 Thus, this template engine can be used for both text and binary files (in theory at least).
 
+## Use Cases
+This template engine can be used to merge a website HTML template with content from different pages
+to generate finished, full HTML pages. Create an HTML template file, insert some insertion points
+and merge it with content from different content files. The content files should of course only contain
+the main content to be displayed in the HTML page. The outer layout should be provided by the 
+HTML template file.
 
-## Key Classes
+
+## Core Classes
 
 |Class|Description|
 |-----|-----------|

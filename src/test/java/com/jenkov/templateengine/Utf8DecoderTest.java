@@ -40,7 +40,6 @@ public class Utf8DecoderTest {
         assertEquals('ø', (char) utf8Decoder.nextCodePoint());
         assertEquals('å', (char) utf8Decoder.nextCodePoint());
 
-
         System.out.println("done");
 
     }
