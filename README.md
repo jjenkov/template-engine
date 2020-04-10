@@ -17,6 +17,7 @@ HTML template file.
 
 |Class|Description|
 |-----|-----------|
+|Utf8TemplateParser| Can parse a UTF-8 text (bytes) and create a Template from it. |
 |Template| Template with insertion points. |
 |InsertionPoint| An area in a template at which data can be inserted during a merge operation|
 |DataProvider| Provider for data to be inserted into a template. |

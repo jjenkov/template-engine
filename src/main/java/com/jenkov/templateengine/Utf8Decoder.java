@@ -8,14 +8,30 @@ public class Utf8Decoder {
 
     private int codePoint = 0;
 
+    public Utf8Decoder() {}
+
     public Utf8Decoder(byte[] data) {
         this.data = data;
+    }
+
+    public byte[] getData() {
+        return this.data;
     }
 
     public void setData(byte[] data) {
         this.data = data;
         this.readOffset = 0;
         this.codePoint  = 0;
+    }
+
+
+
+    public int getReadOffset(){
+        return this.readOffset;
+    }
+
+    public boolean hasNext() {
+        return this.readOffset < this.data.length-1;
     }
 
     public int getCodePoint() {

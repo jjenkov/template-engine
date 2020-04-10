@@ -1,6 +1,9 @@
 package com.jenkov.templateengine;
 
+import com.sun.scenario.effect.Merge;
 import org.junit.jupiter.api.Test;
+
+import java.io.UnsupportedEncodingException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -48,5 +51,47 @@ public class MergerTest {
         assertEquals( 7, dest[destIndex++]);
         assertEquals(41, dest[destIndex++]);
         assertEquals( 9, dest[destIndex++]);
+    }
+
+    public void testMergeWithTemplate() throws UnsupportedEncodingException {
+        Merger merger = new Merger();
+
+
+        Utf8TemplateParser parser = new Utf8TemplateParser();
+        byte[] utf8Bytes = "1 ${one} and 2 ${two} 3".getBytes("UTF-8");
+        Template template = parser.parse(utf8Bytes);
+        merger.setTemplate(template);
+
+        DataProvider dataProvider = new DataProvider();
+        dataProvider.addData(new ID("one".getBytes("UTF-8")), new RawData(new byte[]{65,66,67}));
+        dataProvider.addData(new ID("two".getBytes("UTF-8")), new RawData(new byte[]{97,98}));
+
+        merger.setDataProvider(dataProvider);
+
+        byte[] dest = new byte[1024];
+
+        int bytesWritten = merger.writeDataInto(dest, 0);
+
+        assertEquals(16, bytesWritten);
+
+        int index = 0;
+        assertEquals('1', (char) dest[index++]);
+        assertEquals(' ', (char) dest[index++]);
+        assertEquals('A', (char) dest[index++]);
+        assertEquals('B', (char) dest[index++]);
+        assertEquals('C', (char) dest[index++]);
+        assertEquals(' ', (char) dest[index++]);
+        assertEquals('a', (char) dest[index++]);
+        assertEquals('n', (char) dest[index++]);
+        assertEquals('d', (char) dest[index++]);
+        assertEquals(' ', (char) dest[index++]);
+        assertEquals('2', (char) dest[index++]);
+        assertEquals(' ', (char) dest[index++]);
+        assertEquals('a', (char) dest[index++]);
+        assertEquals('b', (char) dest[index++]);
+        assertEquals(' ', (char) dest[index++]);
+        assertEquals('3', (char) dest[index++]);
+
+
     }
 }

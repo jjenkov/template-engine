@@ -1,5 +1,7 @@
 package com.jenkov.templateengine;
 
+import java.io.UnsupportedEncodingException;
+
 public class ID {
 
     protected byte[] idBytes = null;
@@ -46,5 +48,14 @@ public class ID {
         }
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return new String(this.idBytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return new String(this.idBytes);
+        }
     }
 }
