@@ -38,4 +38,9 @@ public class InsertionPoint {
     public void setEndOffset(int endOffset) {
         this.endOffset = endOffset;
     }
+
+    @Override
+    public String toString() {
+        return "{ id: " + getId() + ", startOffset: " + getStartOffset() + ", endOffset: " + getEndOffset() + "}";
+    }
 }
