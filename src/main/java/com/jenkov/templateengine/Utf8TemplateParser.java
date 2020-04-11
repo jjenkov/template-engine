@@ -12,6 +12,7 @@ public class Utf8TemplateParser {
     public Template parse(Utf8Decoder utf8Decoder) {
 
         Template template = new Template();
+        template.setData(utf8Decoder.getData());
 
         int nextCodePoint = 0;
         while(utf8Decoder.hasNext()) {

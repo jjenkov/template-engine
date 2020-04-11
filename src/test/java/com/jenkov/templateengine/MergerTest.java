@@ -53,6 +53,7 @@ public class MergerTest {
         assertEquals( 9, dest[destIndex++]);
     }
 
+    @Test
     public void testMergeWithTemplate() throws UnsupportedEncodingException {
         Merger merger = new Merger();
 
@@ -70,6 +71,9 @@ public class MergerTest {
 
         byte[] dest = new byte[1024];
 
+        System.out.println("=====================");
+        System.out.println(" Template      : " + template);
+        System.out.println(" Template Data : " + template.getData());
         int bytesWritten = merger.writeDataInto(dest, 0);
 
         assertEquals(16, bytesWritten);

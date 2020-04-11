@@ -7,8 +7,6 @@ public class Merger implements Data{
     protected Template     template     = null;
     protected DataProvider dataProvider = null;
 
-    private byte[] mergedResult = null;
-
     public Merger() {}
 
     public Template getTemplate() {
@@ -46,6 +44,8 @@ public class Merger implements Data{
 
             //copy data from template - from previous insertion point endOffset to insertion point start offset
             int templateDataBlockLength = startOffset - prevEndOffset;
+            System.out.println("templateData: " + templateData);
+            System.out.println("dest: " + dest);
             System.arraycopy(templateData, prevEndOffset, dest, writeOffset, templateDataBlockLength);
             prevEndOffset = insertionPoint.getEndOffset();
 
