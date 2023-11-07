@@ -5,14 +5,18 @@ public class Utf8TemplateParser {
     private Utf8Decoder utf8Decoder = new Utf8Decoder();
 
     public Template parse(byte[] utf8Bytes) {
-        this.utf8Decoder.setData(utf8Bytes);
+        return parse(utf8Bytes, 0, utf8Bytes.length);
+    }
+
+    public Template parse(byte[] utf8Bytes, int offset, int length) {
+        this.utf8Decoder.setData(utf8Bytes, offset, length);
         return parse(this.utf8Decoder);
     }
 
     public Template parse(Utf8Decoder utf8Decoder) {
 
         Template template = new Template();
-        template.setData(utf8Decoder.getData());
+        template.setData(utf8Decoder.getData(), utf8Decoder.getStartOffset(), utf8Decoder.getLength());
 
         int nextCodePoint = 0;
         while(utf8Decoder.hasNext()) {

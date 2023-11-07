@@ -28,7 +28,7 @@ public class Merger implements Data{
     @Override
     public int writeDataInto(byte[] dest, int firstOffset) {
 
-        byte[]               templateData            = template.getData();
+        byte[]               templateData    = template.getData();
         List<InsertionPoint> insertionPoints = template.getInsertionPoints();
 
         if(insertionPoints.size() == 0) {
@@ -37,15 +37,16 @@ public class Merger implements Data{
         }
 
         int writeOffset   = firstOffset;
-        int prevEndOffset = 0;
+        //int prevEndOffset = 0;
+        int prevEndOffset = this.template.getOffset(); //offset for beginning of template data
         for(int i=0; i<insertionPoints.size(); i++) {
             InsertionPoint insertionPoint = insertionPoints.get(i);
             int startOffset = insertionPoint.getStartOffset();
 
             //copy data from template - from previous insertion point endOffset to insertion point start offset
             int templateDataBlockLength = startOffset - prevEndOffset;
-            System.out.println("templateData: " + templateData);
-            System.out.println("dest: " + dest);
+            //System.out.println("templateData: " + templateData);
+            //System.out.println("dest: " + dest);
             System.arraycopy(templateData, prevEndOffset, dest, writeOffset, templateDataBlockLength);
             prevEndOffset = insertionPoint.getEndOffset();
 
@@ -56,7 +57,9 @@ public class Merger implements Data{
         }
 
         //write last template data block - after last insertion point and until end of template.
-        int lastBlockLength = templateData.length - prevEndOffset;
+        int templateDataEndOffset = this.template.getOffset() + this.template.getLength();
+
+        int lastBlockLength = templateDataEndOffset - prevEndOffset;
         System.arraycopy(templateData, prevEndOffset, dest, writeOffset, lastBlockLength);
         writeOffset += lastBlockLength;
 

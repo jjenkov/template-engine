@@ -10,6 +10,14 @@ public class ID {
     public ID(byte[] idBytes) {
         this.idBytes = idBytes;
     }
+    public ID(String id) {
+        try {
+            this.idBytes = id.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            //since UTF-8 is a supported encoding, this exception will never occur.
+            throw new RuntimeException("Error getting UTF-8 encoded bytes from String.getBytes(\"UTF-8\")", e);
+        }
+    }
 
     public byte[] getIdBytes() {
         return this.idBytes;

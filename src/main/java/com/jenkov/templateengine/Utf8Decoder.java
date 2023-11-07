@@ -2,11 +2,13 @@ package com.jenkov.templateengine;
 
 public class Utf8Decoder {
 
-    private byte[] data = null;
+    private byte[] data    = null;
+    private int    length  = 0;
 
+    private int startOffset= 0;
+    private int endOffset  = 0;
     private int readOffset = 0;
-
-    private int codePoint = 0;
+    private int codePoint  = 0;
 
     public Utf8Decoder() {}
 
@@ -18,10 +20,33 @@ public class Utf8Decoder {
         return this.data;
     }
 
+    public int getLength() {
+        return length;
+    }
+
+    public int getStartOffset() {
+        return startOffset;
+    }
+
+    public int getEndOffset() {
+        return endOffset;
+    }
+
     public void setData(byte[] data) {
-        this.data = data;
+        this.data       = data;
+        this.length     = data.length;
+        this.endOffset  = this.length;
+        this.startOffset = 0;
         this.readOffset = 0;
         this.codePoint  = 0;
+    }
+
+    public void setData(byte[] data, int readOffset, int length) {
+        this.data       = data;
+        this.length     = length;
+        this.startOffset = readOffset;
+        this.readOffset = readOffset;
+        this.endOffset  = readOffset + length;
     }
 
 
@@ -31,7 +56,7 @@ public class Utf8Decoder {
     }
 
     public boolean hasNext() {
-        return this.readOffset < this.data.length-1;
+        return this.readOffset < this.endOffset - 1;
     }
 
     public int getCodePoint() {

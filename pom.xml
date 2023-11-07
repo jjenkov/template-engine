@@ -6,7 +6,7 @@
 
     <groupId>com.jenkov</groupId>
     <artifactId>template-engine</artifactId>
-    <version>0.8.0</version>
+    <version>0.8.1</version>
     <packaging>jar</packaging>
 
     <name>Template Engine</name>

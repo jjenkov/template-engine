@@ -14,6 +14,11 @@ public class DataProvider {
     public int writeDataInto(byte[] dest, int offset, ID insertionPointId){
         Data dataForInsertionPointId = this.dataMap.get(insertionPointId);
 
+        //handle no (null) dataForInsertionPointId situations.
+        if(dataForInsertionPointId == null) {
+            return 0;
+        }
+
         return dataForInsertionPointId.writeDataInto(dest, offset);
     }
 
